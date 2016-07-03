@@ -1,1 +1,12 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/images/obstacles">
+        <file>images/obstacles/bricks.png</file>
+        <file>images/obstacles/camouflage.png</file>
+        <file>images/obstacles/concrete.png</file>
+        <file>images/obstacles/falcon_destroyed.png</file>
+        <file>images/obstacles/falcon_normal.png</file>
+        <file>images/obstacles/ground.png</file>
+        <file>images/obstacles/ice.png</file>
+        <file>images/obstacles/water.png</file>
+    </qresource>
+</RCC>

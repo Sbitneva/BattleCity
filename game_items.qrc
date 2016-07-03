@@ -1,1 +1,11 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/">
+        <file>images/bullet.png</file>
+        <file>images/enemytank.png</file>
+        <file>images/explosion.png</file>
+        <file>images/flag.png</file>
+        <file>images/frag_icon.png</file>
+        <file>images/mybase.png</file>
+        <file alias="myTank.png">images/mytank.png</file>
+    </qresource>
+</RCC>

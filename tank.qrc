@@ -1,1 +1,12 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/player">
+        <file>images/mytank.png</file>
+        <file>images/mytank_down.png</file>
+        <file>images/mytank_left.png</file>
+        <file>images/mytank_right.png</file>
+        <file>images/bullet.png</file>
+        <file>images/bullet_down.png</file>
+        <file>images/bullet_left.png</file>
+        <file>images/bullet_right.png</file>
+    </qresource>
+</RCC>
