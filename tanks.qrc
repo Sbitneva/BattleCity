@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/player">
-        <file>images/mytank.png</file>
-    </qresource>
-</RCC>
