@@ -8,5 +8,8 @@
         <file>Audio/tankEnemy.wav</file>
         <file>Audio/tankOne.wav</file>
         <file>Audio/tankTwo.wav</file>
+        <file>Audio/explode.wav</file>
+        <file>Audio/bturr.wav</file>
+        <file>Audio/laser.wav</file>
     </qresource>
 </RCC>

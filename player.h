@@ -11,6 +11,7 @@
 #include <QTime>
 #include <QList>
 #include <QGraphicsItem>
+#include <QMediaPlayer>
 
 class Player: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -26,6 +27,7 @@ private:
     void moveDown();
     void moveUp();
     QList<QGraphicsItem *> colliding_items;
+    QMediaPlayer sound;
 public slots:
     void spawn();
 };

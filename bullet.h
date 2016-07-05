@@ -10,17 +10,18 @@
 
 class Bullet:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
-public:    
+public:
     Bullet(QString rotation);
-public slots:    
+public slots:
     void move();
 private:
     QTimer timer;
     QPixmap pixmap;
-    QMediaPlayer sound;
     QList<QGraphicsItem *> colliding_items;
     QString rotation = "Up";
     void removeBricks(int i);
+    void removeBricksUp(int coordX, int coordY);
+    void removeBricksLeft(int coordX, int coordY);
 };
 
 #endif // BULLET_H

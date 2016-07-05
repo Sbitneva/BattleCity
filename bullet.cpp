@@ -12,10 +12,6 @@
 
 Bullet::Bullet(QString rotation){
 
-    sound.setMedia(QUrl("qrc:/gamesounds/Audio/shoot.wav"));
-    qDebug() <<  sound.duration();
-    sound.play();
-
     this->rotation = rotation;
 
     if(this->rotation == "Up"){
@@ -100,51 +96,71 @@ void Bullet::removeBricks(int i){
     scene()->removeItem(this->colliding_items[i]);
 
     if(this->rotation == "Up"){
-
-        for(int j = 0; j < this->colliding_items.size(); j++){
-
-            if((colliding_items[j]->pos().y() == coordY) && (typeid(*(colliding_items[j])) == typeid(SmallBrick))){
-
-                if(colliding_items[j]->pos().x() == (coordX - 16)){
-
-                    //qDebug() << "right " << this->colliding_items[j]->pos().x();
-
-                    QGraphicsItem * right = scene()->itemAt(QPointF((coordX + 16), coordY), QTransform());
-                    QGraphicsItem * left = scene()->itemAt(QPointF((coordX - 32), coordY), QTransform());
-                    //QGraphicsItem * under;
-
-                    if(right && (typeid(*right) ) == typeid(SmallBrick)){
-                        //under = scene()->itemAt(QPointF(right->pos().x(), right->pos().y()+16), QTransform());
-                        //if(!under){
-                            //if(typeid(*(under)) == typeid(SmallBrick)){
-                                qDebug() << "right is ";
-                                scene()->removeItem(right);
-                                delete right;
-                            //}
-                        //}
-                    }
-                    if(left && (typeid(*left) ) == typeid(SmallBrick)){
-                        //under = scene()->itemAt(QPointF(left->pos().x(), left->pos().y()+16), QTransform());
-                        //if(!under){
-                            qDebug() << "left is ";
-                            scene()->removeItem(left);
-                            delete left;
-                        //}
-                    }
-                    scene()->removeItem(colliding_items[j]);
-                    delete colliding_items[j];
-                }
-            }
-        }
+        removeBricksUp(coordX, coordY);
     } else if(this->rotation == "Down"){
-
+        removeBricksUp(coordX, coordY);
     } else if(this->rotation == "Left"){
-
+        removeBricksLeft(coordX, coordY);
     } else if(this->rotation == "Right"){
-
+        removeBricksLeft(coordX, coordY);
     }
-
     scene()->removeItem(this);
     delete colliding_items[i];
     delete this;
 }
+
+void Bullet::removeBricksUp(int coordX, int coordY){
+
+    for(int j = 0; j < this->colliding_items.size(); j++){
+
+        if((colliding_items[j]->pos().y() == coordY) && (typeid(*(colliding_items[j])) == typeid(SmallBrick))){
+            if(colliding_items[j]->pos().x() == (coordX - 16)){
+
+                QGraphicsItem * right = scene()->itemAt(QPointF((coordX + 16), coordY), QTransform());
+                QGraphicsItem * left = scene()->itemAt(QPointF((coordX - 32), coordY), QTransform());
+
+                if(right && (typeid(*right) ) == typeid(SmallBrick)){
+                    qDebug() << "right is ";
+                    scene()->removeItem(right);
+                    delete right;
+                }
+                if(left && (typeid(*left) ) == typeid(SmallBrick)){
+                    qDebug() << "left is ";
+                    scene()->removeItem(left);
+                    delete left;
+                }
+                scene()->removeItem(colliding_items[j]);
+                delete colliding_items[j];
+            }
+        }
+    }
+}
+
+
+void Bullet::removeBricksLeft(int coordX, int coordY){
+    for(int j = 0; j < this->colliding_items.size(); j++){
+
+        if((colliding_items[j]->pos().x() == coordX) && (typeid(*(colliding_items[j])) == typeid(SmallBrick))){
+
+            if(colliding_items[j]->pos().y() == (coordY - 16)){
+
+                QGraphicsItem * right = scene()->itemAt(QPointF(coordX, coordY + 16), QTransform());
+                QGraphicsItem * left = scene()->itemAt(QPointF(coordX, coordY - 32), QTransform());
+
+                if(right && (typeid(*right) ) == typeid(SmallBrick)){
+                    qDebug() << "right is ";
+                    scene()->removeItem(right);
+                    delete right;
+                }
+                if(left && (typeid(*left) ) == typeid(SmallBrick)){
+                    qDebug() << "left is ";
+                    scene()->removeItem(left);
+                    delete left;
+                }
+                scene()->removeItem(colliding_items[j]);
+                delete colliding_items[j];
+            }
+        }
+    }
+}
+
