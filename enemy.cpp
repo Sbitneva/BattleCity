@@ -34,7 +34,7 @@ void Enemy::spawn()
 
 void Enemy::shot(){
 
-    Bullet * bullet = new Bullet(rotation);
+    Bullet * bullet = new Bullet(rotation, "Enemy");
     sound.setMedia(QUrl("qrc:/gamesounds/Audio/explode.wav"));
     qDebug() <<  sound.duration();
     sound.play();

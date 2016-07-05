@@ -11,9 +11,10 @@
 #include <QPointF>
 #include "player.h"
 
-Bullet::Bullet(QString rotation){
+Bullet::Bullet(QString rotation, QString tank){
 
     this->rotation = rotation;
+    this->parent = tank;
 
     if(this->rotation == "Up"){
         pixmap.load(":/player/images/bullet.png");
@@ -57,7 +58,13 @@ void Bullet::move(){
             delete colliding_items[i];
             delete this;
             return;
-        }else if(typeid(*(colliding_items[i])) == typeid(Enemy)){
+        }else if((parent == "Player") && (typeid(*(colliding_items[i])) == typeid(Enemy))){
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+            delete colliding_items[i];
+            delete this;
+            return;
+        }else if((parent == "Enemy") && (typeid(*(colliding_items[i])) == typeid(Player))){
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
             delete colliding_items[i];

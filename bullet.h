@@ -11,7 +11,7 @@
 class Bullet:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Bullet(QString rotation);
+    Bullet(QString rotation, QString tank);
 public slots:
     void move();
 private:
@@ -19,6 +19,7 @@ private:
     QPixmap pixmap;
     QList<QGraphicsItem *> colliding_items;
     QString rotation = "Up";
+    QString parent;
     void removeBricks(int i);
     void removeBricksUp(int coordX, int coordY);
     void removeBricksLeft(int coordX, int coordY);
