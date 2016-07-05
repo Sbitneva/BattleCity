@@ -6,6 +6,9 @@
 //#include <Enemy.h>
 #include <QGraphicsItem>
 #include <QString>
+#include "smallbrick.h"
+#include "armored.h"
+#include <QPointF>
 
 Bullet::Bullet(QString rotation){
 
@@ -29,36 +32,42 @@ Bullet::Bullet(QString rotation){
 
     this->rotation = rotation;
 
-    qDebug() << "bullet created: " << rotation;
-
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(20);
+    timer->start(15);
 }
 
 void Bullet::move(){
-    //destroy enemy
-    /*QList<QGraphicsItem *> colliding_items = collidingItems();
+
+    colliding_items = collidingItems();
+
+    qDebug() << "size = " << this->colliding_items.size();
+
     for(int i = 0, n = colliding_items.size(); i< n; i++){
-        if(typeid(*(colliding_items[i])) == typeid(Enemy)){
-            //remove both: an enemy and bullet
+        if(typeid(*(colliding_items[i])) == typeid(SmallBrick)){
+            //delete both objects
+            removeBricks(i);
+            return;
+        }else if(typeid(*(colliding_items[i])) == typeid(Armored)){
+            scene()->removeItem(this);
+            delete this;
+            return;
+        }else if(typeid(*(colliding_items[i])) == typeid(Bullet)){
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            //delete both objects
             delete colliding_items[i];
             delete this;
             return;
         }
     }
-    */
+
     //move bullet
     if(this->rotation == "Up"){
         setPos(x(), y() - 10);
         if(pos().y() < 0){
             scene()->removeItem(this);
             delete this;
-            qDebug() << "bullet deleted";
         }
     }
     else if(this->rotation == "Down"){
@@ -66,7 +75,6 @@ void Bullet::move(){
         if(pos().y() > 832){
             scene()->removeItem(this);
             delete this;
-            qDebug() << "bullet deleted";
         }
     }
     else if(this->rotation == "Right"){
@@ -74,7 +82,6 @@ void Bullet::move(){
         if(pos().x() > 832){
             scene()->removeItem(this);
             delete this;
-            qDebug() << "bullet deleted";
         }
     }
     else if(this->rotation == "Left"){
@@ -82,7 +89,52 @@ void Bullet::move(){
         if(pos().x() < 0){
             scene()->removeItem(this);
             delete this;
-            qDebug() << "bullet deleted";
         }
     }
+}
+void Bullet::removeBricks(int i){
+    int coordX = this->colliding_items[i]->pos().x();
+    int coordY = this->colliding_items[i]->pos().y();
+
+    scene()->removeItem(this->colliding_items[i]);
+
+    if(this->rotation == "Up"){
+
+        for(int j = 0; j < this->colliding_items.size(); j++){
+
+            if((colliding_items[j]->pos().y() == coordY) && (typeid(*(colliding_items[j])) == typeid(SmallBrick))){
+
+                if(colliding_items[j]->pos().x() == (coordX - 16)){
+
+                    qDebug() << "right " << this->colliding_items[j]->pos().x();
+
+                    QGraphicsItem * right = scene()->itemAt(QPointF((coordX + 16), coordY), QTransform());
+                    QGraphicsItem * left = scene()->itemAt(QPointF((coordX - 32), coordY), QTransform());
+
+                    if(right && (typeid(*right) ) == typeid(SmallBrick)){
+                        qDebug() << "right is ";
+                        scene()->removeItem(right);
+                        delete right;
+                    }
+                    if(left && (typeid(*left) ) == typeid(SmallBrick)){
+                        qDebug() << "left is ";
+                        scene()->removeItem(left);
+                        delete left;
+                    }
+                    scene()->removeItem(colliding_items[j]);
+                    delete colliding_items[j];
+                }
+            }
+        }
+    } else if(this->rotation == "Down"){
+
+    } else if(this->rotation == "Left"){
+
+    } else if(this->rotation == "Right"){
+
+    }
+
+    scene()->removeItem(this);
+    delete colliding_items[i];
+    delete this;
 }

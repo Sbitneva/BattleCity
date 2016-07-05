@@ -15,20 +15,23 @@ TEMPLATE = app
 SOURCES += main.cpp \
     Game.cpp \
     Player.cpp \
-    board.cpp \
     bullet.cpp \
-    brickwall.cpp \
-    enemy.cpp
+    enemy.cpp \
+    smallbrick.cpp \
+    armored.cpp
 
 HEADERS  += \
     Game.h \
     Player.h \
-    board.h \
     bullet.h \
-    brickwall.h \
-    enemy.h
+    enemy.h \
+    smallbrick.h \
+    armored.h
 
 RESOURCES += \
     board_items.qrc \
-    tank.qrc
+    tank.qrc \
+    maps.qrc
+
+DISTFILES +=
 

@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <player.h>
 
+
 class Game: public QGraphicsView{
 public:
     Game(QWidget * parent = 0);
@@ -16,6 +17,11 @@ public:
     QGraphicsScene * scene;
 
     Player * player;
+
+private:
+    void loadMapFromFile();
+    QVector<QVector<QString>>  mapMatrix;
+    void createObstacles();
 };
 
 #endif // GAME_H

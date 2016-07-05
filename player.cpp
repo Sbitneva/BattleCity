@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "bullet.h"
+#include "armored.h"
+#include "smallbrick.h"
 
 #include <QDebug>
 #include <QKeyEvent>
@@ -11,19 +13,22 @@
 #include <QStyleOptionGraphicsItem>
 #include <QWidget>
 #include <QTimer>
+#include <QList>
+#include <QGraphicsItem>
+
 
 Player::Player(){
     QPixmap * pixmap = new QPixmap(":/player/images/mytank.png");
     this->setPixmap(*pixmap);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setTransformationMode(Qt::SmoothTransformation);
-    this->setPos(384, 768);
+    this->setPos(256, 768);
     this->setFocus();
 }
 
 void Player::keyPressEvent(QKeyEvent * event){
 
-    QPixmap * pixmap = new QPixmap();
+    //QPixmap * pixmap = new QPixmap();
 
     if(event->key() == Qt::Key_Left){
         moveLeft();
@@ -40,12 +45,12 @@ void Player::keyPressEvent(QKeyEvent * event){
 
     else if(event->key() == Qt::Key_Space){
         //create a bullet
-        qDebug() << this->timeLastBullet->msec() << "check last bullet msec";
+        //qDebug() << this->timeLastBullet->msec() << "check last bullet msec";
 
-        if((this->timeLastBullet->elapsed() > 800) || (this->timeLastBullet->msec() == -1)){
+        if((this->timeLastBullet->elapsed() > 200) || (this->timeLastBullet->msec() == -1)){
             this->timeLastBullet->restart();
             //this->timeLastBullet->start();
-            qDebug() << this->timeLastBullet->msec() << "restart msec";
+            //qDebug() << this->timeLastBullet->msec() << "restart msec";
             this->shot();
         }
         //QTimer * timer = new QTimer();
@@ -84,45 +89,100 @@ void Player::shot(){
 
 void Player::moveLeft(){
     QPixmap * pixmap = new QPixmap();
+    pixmap->load(":/player/images/mytank_left.png");
+    this->setPixmap(*pixmap);
+    rotation = "Left";
 
-    if(pos().x() > 0)
-        this->setPos(x() - 8, y());
-        pixmap->load(":/player/images/mytank_left.png");
-        this->setPixmap(*pixmap);
-        rotation = "Left";
-        //qDebug()<< rotation;
+    int xTankPos = this->pos().x() - 16;
+    int yTankPos = this->pos().y();
+
+    //qDebug() << "tank "<< this->pos().x() << " " << this->pos().y();
+
+    QGraphicsItem * leftItem;
+
+    if(pos().x() > 0){
+
+        for(int i = 0; i < 4; i++){
+            leftItem = scene()->itemAt(QPointF((xTankPos), yTankPos + 16 * i), QTransform());
+            if(leftItem){
+                return;
+            }
+        }
+        this->setPos(x() - 16, y());
+    }
+
+    qDebug()<< rotation;
+
 }
 
 void Player::moveRight(){
-    QPixmap * pixmap = new QPixmap();
 
-    if(pos().x() < 768)
-            setPos(x() + 8, y());
-        pixmap->load(":/player/images/mytank_right.png");
-        this->setPixmap(*pixmap);
-        rotation = "Right";
-        //qDebug()<< rotation;
+    QPixmap * pixmap = new QPixmap();
+    pixmap->load(":/player/images/mytank_right.png");
+    this->setPixmap(*pixmap);
+    rotation = "Right";
+
+    int xTankPos = this->pos().x() + 64;
+    int yTankPos = this->pos().y();
+
+    QGraphicsItem * rightItem;
+
+    if(pos().x() < 768){
+        for(int i = 0; i < 4; i++){
+            rightItem = scene()->itemAt(QPointF((xTankPos), yTankPos + 16 * i), QTransform());
+            if(rightItem){
+                return;
+            }
+        }
+        setPos(x() + 16, y());
+    }
 }
 
 void Player::moveUp(){
-    QPixmap * pixmap = new QPixmap();
 
-    if(pos().y() > 0)
-    setPos(x(), y() - 8);
+    QPixmap * pixmap = new QPixmap();
     pixmap->load(":/player/images/mytank.png");
     this->setPixmap(*pixmap);
     rotation = "Up";
-    //qDebug()<< rotation;
+
+    int xTankPos = this->pos().x();
+    int yTankPos = this->pos().y() - 16;
+
+    QGraphicsItem * upItem;
+
+
+    if(pos().y() > 0){
+        for(int i = 0; i < 4; i++){
+            upItem = scene()->itemAt(QPointF((xTankPos + i * 16), yTankPos), QTransform());
+            if(upItem){
+                return;
+            }
+        }
+        setPos(x(), y() - 16);
+    }
 }
 
 void Player::moveDown(){
-    QPixmap * pixmap = new QPixmap();
 
-    if(pos().y() < 768)
-        setPos(x(), y() + 8);
+    QPixmap * pixmap = new QPixmap();
     pixmap->load(":/player/images/mytank_down.png");
     this->setPixmap(*pixmap);
     rotation = "Down";
-    //qDebug()<< rotation;
+
+    QGraphicsItem * downItem;
+
+    int xTankPos = this->pos().x();
+    int yTankPos = this->pos().y() + 64 ;
+
+    if(pos().y() < 768){
+        for(int i = 0; i < 4; i++){
+            downItem = scene()->itemAt(QPointF((xTankPos + i * 16), yTankPos), QTransform());
+            if(downItem){
+                return;
+            }
+        }
+        setPos(x(), y() + 16);
+    }
+
 }
 
