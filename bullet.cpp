@@ -3,12 +3,13 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
-//#include <Enemy.h>
+#include <enemy.h>
 #include <QGraphicsItem>
 #include <QString>
 #include "smallbrick.h"
 #include "armored.h"
 #include <QPointF>
+#include "player.h"
 
 Bullet::Bullet(QString rotation){
 
@@ -51,6 +52,12 @@ void Bullet::move(){
             delete this;
             return;
         }else if(typeid(*(colliding_items[i])) == typeid(Bullet)){
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+            delete colliding_items[i];
+            delete this;
+            return;
+        }else if(typeid(*(colliding_items[i])) == typeid(Enemy)){
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
             delete colliding_items[i];

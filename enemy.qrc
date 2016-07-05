@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/tank">
+        <file>images/enemytank.png</file>
+        <file>images/enemytank_down.png</file>
+        <file>images/enemytank_left.png</file>
+        <file>images/enemytank_right.png</file>
+    </qresource>
+</RCC>

@@ -33,7 +33,8 @@ RESOURCES += \
     board_items.qrc \
     tank.qrc \
     maps.qrc \
-    audio.qrc
+    audio.qrc \
+    enemy.qrc
 
 DISTFILES +=
 

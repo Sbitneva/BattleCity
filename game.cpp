@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QTextStream>
 #include <armored.h>
+#include <enemy.h>
 
 
 Game::Game(QWidget * parent){
@@ -25,6 +26,8 @@ Game::Game(QWidget * parent){
     createObstacles();
     player = new Player();
     scene->addItem(player);
+    Enemy * enemy = new Enemy();
+    scene->addItem(enemy);
 
     QTimer * timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
