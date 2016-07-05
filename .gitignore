@@ -2,6 +2,12 @@
 *.user
 *.autosave
 
+# Visual Studio related
+GeneratedFiles
+x64
+x86
+*.vcxproj*
+
 # Build related
 debug
 release

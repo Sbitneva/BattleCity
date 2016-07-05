@@ -12,10 +12,10 @@
 #include <enemy.h>
 
 
-Game::Game(QWidget * parent){
+Game::Game(QWidget * parent = nullptr){
 
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0, 832, 832);
+    scene->setSceneRect(0, 0, 832, 832);
     scene->setBackgroundBrush(Qt::black);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -72,7 +72,7 @@ void Game::createObstacles(){
 
     QVector<QString> row(26);
 
-    if(mapMatrix.size()>0){
+    if(mapMatrix.size()){
 
         for(int i = 0; i < this->mapMatrix.size(); i++){
             row = mapMatrix[i];

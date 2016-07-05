@@ -12,7 +12,7 @@
 
 class Game: public QGraphicsView{
 public:
-    Game(QWidget * parent = 0);
+    Game(QWidget * parent = nullptr);
 
     QGraphicsScene * scene;
 
@@ -20,7 +20,7 @@ public:
 
 private:
     void loadMapFromFile();
-    QVector<QVector<QString>>  mapMatrix;
+    QVector<QVector<QString>> mapMatrix;
     void createObstacles();
 };
 
