@@ -12,34 +12,31 @@
 
 Bullet::Bullet(QString rotation){
 
-    QPixmap * pixmap = new QPixmap();
-    bulletsound = new QMediaPlayer();
-    bulletsound->setMedia(QUrl("qrc:/gamesounds/Audio/shoot.wav"));
-    qDebug() <<  bulletsound->duration();
-    bulletsound->play();
+    sound.setMedia(QUrl("qrc:/gamesounds/Audio/shoot.wav"));
+    qDebug() <<  sound.duration();
+    sound.play();
 
     this->rotation = rotation;
 
     if(this->rotation == "Up"){
-        pixmap->load(":/player/images/bullet.png");
+        pixmap.load(":/player/images/bullet.png");
     }
     else if(this->rotation == "Down"){
-        pixmap->load(":/player/images/bullet_down.png");
+        pixmap.load(":/player/images/bullet_down.png");
     }
     else if(this->rotation == "Right"){
-        pixmap->load(":/player/images/bullet_right.png");
+        pixmap.load(":/player/images/bullet_right.png");
     }
     else if(this->rotation == "Left"){
-        pixmap->load(":/player/images/bullet_left.png");
+        pixmap.load(":/player/images/bullet_left.png");
     }
-    this->setPixmap(*pixmap);
+    this->setPixmap(pixmap);
 
     this->rotation = rotation;
 
-    QTimer * timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    connect(&timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(15);
+    timer.start(15);
 }
 
 void Bullet::move(){
@@ -110,14 +107,14 @@ void Bullet::removeBricks(int i){
 
                 if(colliding_items[j]->pos().x() == (coordX - 16)){
 
-                    qDebug() << "right " << this->colliding_items[j]->pos().x();
+                    //qDebug() << "right " << this->colliding_items[j]->pos().x();
 
                     QGraphicsItem * right = scene()->itemAt(QPointF((coordX + 16), coordY), QTransform());
                     QGraphicsItem * left = scene()->itemAt(QPointF((coordX - 32), coordY), QTransform());
-                    QGraphicsItem * under;
+                    //QGraphicsItem * under;
 
                     if(right && (typeid(*right) ) == typeid(SmallBrick)){
-                        under = scene()->itemAt(QPointF(right->pos().x(), right->pos().y()+16), QTransform());
+                        //under = scene()->itemAt(QPointF(right->pos().x(), right->pos().y()+16), QTransform());
                         //if(!under){
                             //if(typeid(*(under)) == typeid(SmallBrick)){
                                 qDebug() << "right is ";
@@ -127,7 +124,7 @@ void Bullet::removeBricks(int i){
                         //}
                     }
                     if(left && (typeid(*left) ) == typeid(SmallBrick)){
-                        under = scene()->itemAt(QPointF(left->pos().x(), left->pos().y()+16), QTransform());
+                        //under = scene()->itemAt(QPointF(left->pos().x(), left->pos().y()+16), QTransform());
                         //if(!under){
                             qDebug() << "left is ";
                             scene()->removeItem(left);
