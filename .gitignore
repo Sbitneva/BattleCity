@@ -1,1 +1,8 @@
-*.user 
+# Qt creator related
+*.user
+*.autosave
+
+# Build related
+debug
+release
+Makefile*
