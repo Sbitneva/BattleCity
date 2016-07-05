@@ -45,15 +45,10 @@ void Player::keyPressEvent(QKeyEvent * event){
 
     else if(event->key() == Qt::Key_Space){
         //create a bullet
-        //qDebug() << this->timeLastBullet->msec() << "check last bullet msec";
-
         if((this->timeLastBullet->elapsed() > 200) || (this->timeLastBullet->msec() == -1)){
             this->timeLastBullet->restart();
-            //this->timeLastBullet->start();
-            //qDebug() << this->timeLastBullet->msec() << "restart msec";
             this->shot();
         }
-        //QTimer * timer = new QTimer();
     }
 }
 
@@ -95,8 +90,6 @@ void Player::moveLeft(){
 
     int xTankPos = this->pos().x() - 16;
     int yTankPos = this->pos().y();
-
-    //qDebug() << "tank "<< this->pos().x() << " " << this->pos().y();
 
     QGraphicsItem * leftItem;
 
@@ -183,6 +176,5 @@ void Player::moveDown(){
         }
         setPos(x(), y() + 16);
     }
-
 }
 

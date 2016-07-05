@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +32,8 @@ HEADERS  += \
 RESOURCES += \
     board_items.qrc \
     tank.qrc \
-    maps.qrc
+    maps.qrc \
+    audio.qrc
 
 DISTFILES +=
 

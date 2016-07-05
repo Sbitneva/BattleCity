@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QString>
+#include <QMediaPlayer>
 
 class Bullet:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -15,6 +16,7 @@ private:
     QList<QGraphicsItem *> colliding_items;
     QString rotation = "Up";
     void removeBricks(int i);
+    QMediaPlayer * bulletsound;
 };
 
 #endif // BULLET_H

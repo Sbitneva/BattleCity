@@ -110,14 +110,14 @@ void Bullet::removeBricks(int i){
 
                 if(colliding_items[j]->pos().x() == (coordX - 16)){
 
-                    qDebug() << "right " << this->colliding_items[j]->pos().x();
+                    //qDebug() << "right " << this->colliding_items[j]->pos().x();
 
                     QGraphicsItem * right = scene()->itemAt(QPointF((coordX + 16), coordY), QTransform());
                     QGraphicsItem * left = scene()->itemAt(QPointF((coordX - 32), coordY), QTransform());
-                    QGraphicsItem * under;
+                    //QGraphicsItem * under;
 
                     if(right && (typeid(*right) ) == typeid(SmallBrick)){
-                        under = scene()->itemAt(QPointF(right->pos().x(), right->pos().y()+16), QTransform());
+                        //under = scene()->itemAt(QPointF(right->pos().x(), right->pos().y()+16), QTransform());
                         //if(!under){
                             //if(typeid(*(under)) == typeid(SmallBrick)){
                                 qDebug() << "right is ";
@@ -127,7 +127,7 @@ void Bullet::removeBricks(int i){
                         //}
                     }
                     if(left && (typeid(*left) ) == typeid(SmallBrick)){
-                        under = scene()->itemAt(QPointF(left->pos().x(), left->pos().y()+16), QTransform());
+                        //under = scene()->itemAt(QPointF(left->pos().x(), left->pos().y()+16), QTransform());
                         //if(!under){
                             qDebug() << "left is ";
                             scene()->removeItem(left);

@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/gamesounds">
+        <file>Audio/1-up.wav</file>
+        <file>Audio/explosion.wav</file>
+        <file>Audio/gameStart.mp3</file>
+        <file>Audio/levelUp.wav</file>
+        <file>Audio/shoot.wav</file>
+        <file>Audio/tankEnemy.wav</file>
+        <file>Audio/tankOne.wav</file>
+        <file>Audio/tankTwo.wav</file>
+    </qresource>
+</RCC>
