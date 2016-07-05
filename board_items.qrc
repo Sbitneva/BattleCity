@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/images/board">
         <file>images/board/armoredwall.png</file>
-        <file>images/board/brickwall.png</file>
         <file>images/board/empty_traversable.png</file>
+        <file>images/board/brick.png</file>
     </qresource>
 </RCC>

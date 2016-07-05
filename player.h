@@ -9,6 +9,8 @@
 #include <QWidget>
 #include <bullet.h>
 #include <QTime>
+#include <QList>
+#include <QGraphicsItem>
 
 class Player: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -23,6 +25,7 @@ private:
     void moveRight();
     void moveDown();
     void moveUp();
+    QList<QGraphicsItem *> colliding_items;
 public slots:
     void spawn();
 };

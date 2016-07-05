@@ -7,11 +7,14 @@
 
 class Bullet:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
-public:
-    QString rotation = "Up";
+public:    
     Bullet(QString rotation);
-public slots:
+public slots:    
     void move();
+private:
+    QList<QGraphicsItem *> colliding_items;
+    QString rotation = "Up";
+    void removeBricks(int i);
 };
 
 #endif // BULLET_H
