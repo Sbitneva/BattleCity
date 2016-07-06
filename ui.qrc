@@ -2,5 +2,7 @@
     <qresource prefix="/ui">
         <file>images/battle_city.png</file>
         <file>images/game_over.png</file>
+        <file>Audio/game_over.ogg</file>
+        <file>Audio/fire.wav</file>
     </qresource>
 </RCC>
