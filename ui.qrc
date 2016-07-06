@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ui">
+        <file>images/battle_city.png</file>
+        <file>images/game_over.png</file>
+    </qresource>
+</RCC>

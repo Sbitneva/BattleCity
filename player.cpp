@@ -61,8 +61,8 @@ void Player::spawn()
 void Player::shot(){
 
     Bullet * bullet = new Bullet(rotation, "Player");
+
     sound.setMedia(QUrl("qrc:/gamesounds/Audio/explode.wav"));
-    qDebug() <<  sound.duration();
     sound.play();
     this->timeLastBullet->start();
 

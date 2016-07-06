@@ -10,9 +10,16 @@
 #include <QTextStream>
 #include <armored.h>
 #include <enemy.h>
+#include <base.h>
+#include <gameover.h>
+#include <QMediaPlayer>
 
 
 Game::Game(QWidget * parent){
+
+    QMediaPlayer * sound = new QMediaPlayer();
+    sound->setMedia(QUrl("qrc:/gamesounds/Audio/gameStart.mp3"));
+    sound->play();
 
     scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, 832, 832);
@@ -26,12 +33,27 @@ Game::Game(QWidget * parent){
     createObstacles();
     player = new Player();
     scene->addItem(player);
+
     Enemy * enemy = new Enemy();
     scene->addItem(enemy);
+    enemy->setPos(0, 0);
+
+
+    Enemy * enemy2 = new Enemy();
+    scene->addItem(enemy2);
+    enemy2->setPos(384, 0);
+
+    Enemy * enemy3 = new Enemy();
+    scene->addItem(enemy3);
+    enemy3->setPos(768, 0);
+
+    Base * base = new Base();
+    scene->addItem(base);
 
     QTimer * timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
     timer->start(200);
+
 
     show();
 }

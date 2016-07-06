@@ -20,7 +20,9 @@ SOURCES += main.cpp \
     enemy.cpp \
     smallbrick.cpp \
     armored.cpp \
-    tank.cpp
+    tank.cpp \
+    base.cpp \
+    gameover.cpp
 
 HEADERS  += \
     Game.h \
@@ -29,14 +31,17 @@ HEADERS  += \
     enemy.h \
     smallbrick.h \
     armored.h \
-    tank.h
+    tank.h \
+    base.h \
+    gameover.h
 
 RESOURCES += \
     board_items.qrc \
     tank.qrc \
     maps.qrc \
     audio.qrc \
-    enemy.qrc
+    enemy.qrc \
+    ui.qrc
 
 DISTFILES +=
 

@@ -10,6 +10,9 @@
 #include "armored.h"
 #include <QPointF>
 #include "player.h"
+#include "base.h"
+#include "gameover.h"
+
 
 Bullet::Bullet(QString rotation, QString tank){
 
@@ -69,6 +72,17 @@ void Bullet::move(){
             scene()->removeItem(this);
             delete colliding_items[i];
             delete this;
+            return;
+        }else if(typeid(*(colliding_items[i])) == typeid(Base)){
+            scene()->removeItem(colliding_items[i]);
+            //scene()->removeItem(this);
+            delete colliding_items[i];
+            GameOver * gameover = new GameOver();
+            gameover->setFlag(GraphicsItemFlag::ItemIsFocusScope);
+            gameover->setFocus();
+            scene()->addItem(gameover);
+
+            //delete this;
             return;
         }
     }

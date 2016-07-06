@@ -18,11 +18,11 @@
 
 
 Enemy::Enemy(){
-    QPixmap * pixmap = new QPixmap(":/tank/images/enemytank.png");
+    QPixmap * pixmap = new QPixmap(":/tank/images/enemytank_down.png");
     this->setPixmap(*pixmap);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setTransformationMode(Qt::SmoothTransformation);
-    this->setPos(0, 0);
+
     //this->setFocus();
 }
 
@@ -35,6 +35,7 @@ void Enemy::spawn()
 void Enemy::shot(){
 
     Bullet * bullet = new Bullet(rotation, "Enemy");
+
     sound.setMedia(QUrl("qrc:/gamesounds/Audio/explode.wav"));
     qDebug() <<  sound.duration();
     sound.play();

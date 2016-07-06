@@ -7,7 +7,7 @@
 class Tank:public QObject, public QGraphicsPixmapItem{
 public:
     Tank();
-    //virtual ~Tank();
+    //virtual ~Tank() = 0;
 
 };
 
