@@ -1,120 +1,118 @@
-#include "Game.h"
-#include <QWidget>
-#include <QTimer>
+#include "armored.h"
+#include "enemy.h"
+#include "base.h"
+#include "gameover.h"
+#include "game.h"
 #include "player.h"
-#include <QImage>
-#include <QString>
-#include <QPixmap>
-#include <smallbrick.h>
-#include <QDebug>
+#include "smallbrick.h"
+
+#include <QFile>
+#include <QTimer>
 #include <QTextStream>
-#include <armored.h>
-#include <enemy.h>
-#include <base.h>
-#include <gameover.h>
-#include <QMediaPlayer>
 
-
-Game::Game(QWidget * parent){
-
-    QMediaPlayer * sound = new QMediaPlayer();
-    sound->setMedia(QUrl("qrc:/gamesounds/Audio/gameStart.mp3"));
-    sound->play();
-
-    scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 832, 832);
-    scene->setBackgroundBrush(Qt::black);
+Game::Game(QFile& map) 
+	: mapFile(map)
+{
+    this->sound.setMedia(QUrl("qrc:/gamesounds/Audio/gameStart.mp3"));
+    this->sound.play();
+    this->scene.setSceneRect(0, 0, 832, 832);
+    this->scene.setBackgroundBrush(Qt::black);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(832, 832);
-    setScene(scene);    
+    setScene(&scene);    
 
     createObstacles();
-    player = new Player();
-    scene->addItem(player);
+
+    Player * player = new Player();
+    this->scene.addItem(player);
 	player->setPos(256, 768);
 	player->setFocus();
 
     Enemy * enemy = new Enemy();
-    scene->addItem(enemy);
+    this->scene.addItem(enemy);
     enemy->setPos(0, 0);
 
-
     Enemy * enemy2 = new Enemy();
-    scene->addItem(enemy2);
+    this->scene.addItem(enemy2);
     enemy2->setPos(384, 0);
 
     Enemy * enemy3 = new Enemy();
-    scene->addItem(enemy3);
+    this->scene.addItem(enemy3);
     enemy3->setPos(768, 0);
 
     Base * base = new Base();
-    scene->addItem(base);
+    this->scene.addItem(base);
 	base->setPos(384, 768);
 
     QTimer * timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
     timer->start(200);
 
-
-    show();
+    this->show();
 }
 
-void Game::loadMapFromFile(){
+Game::~Game()
+{
+	for(auto& item: this->scene.items())
+		delete item;
+}
 
-    QFile *  mapFile =  new QFile(":/maps/maps/level1.map");
+void Game::loadMapFromFile()
+{
+    if(mapFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+        QTextStream textStream(&mapFile);
+        QVector<char> row(26);
+        QVector<QVector<char>> mapMatrix(26);
 
-        if(mapFile->open(QIODevice::ReadOnly | QIODevice::Text)){
-
-            QTextStream * textStream = new QTextStream(mapFile);
-            QVector<QString> row(26);
-            QVector<QVector<QString>>  mapMatrix(26);
-            QString  mychar;
-
-            for(int i = 0; i < 26; i++){
-
-                for(int j = 0; j < 26; j++){
-
-                    mychar = textStream->read(1);
-                    if(mychar == "\n"){
-                        mychar = textStream->read(1);
-                    }
-                    row[j] = mychar;
-
+        for(int i = 0; i < 26; i++)
+		{
+            for(int j = 0; j < 26; j++)
+			{
+				char nChar; 
+				textStream >> nChar;
+                if(nChar == '\n')
+				{
+					textStream >> nChar;
                 }
-                mapMatrix[i] = row;
+                row[j] = nChar;
             }
-            this->mapMatrix = mapMatrix;
-
-        }else{
-            //qDebug() << mapFile->errorString();
+            mapMatrix[i] = row;
         }
+        this->mapMatrix = mapMatrix;
+    }
 }
 
-void Game::createObstacles(){
+void Game::createObstacles()
+{
     this->loadMapFromFile();
 
-    QVector<QString> row(26);
+    QVector<char> row;
 
-    if(mapMatrix.size()){
-
-        for(int i = 0; i < this->mapMatrix.size(); i++){
+    if(mapMatrix.size())
+	{
+        for(int i = 0; i < this->mapMatrix.size(); i++)
+		{
             row = mapMatrix[i];
-            for(int j = 0; j < row.size(); j++){
-                if(row[j] == "A"){
+            for(int j = 0; j < row.size(); j++)
+			{
+                if(row[j] == 'A')
+				{
                     Armored * armored = new Armored(j*32, i * 32);
-                    scene->addItem(armored);
-
-                }else if (row[j] == "B"){
+                    this->scene.addItem(armored);
+                }
+				else if (row[j] == 'B')
+				{
                     SmallBrick * smallBrick = new SmallBrick(j*32, i*32);
-                    scene->addItem(smallBrick);
+					this->scene.addItem(smallBrick);
                     smallBrick = new SmallBrick(j*32 + 16, i*32);
-                    scene->addItem(smallBrick);
+					this->scene.addItem(smallBrick);
                     smallBrick = new SmallBrick(j*32, i*32 + 16);
-                    scene->addItem(smallBrick);
+					this->scene.addItem(smallBrick);
                     smallBrick = new SmallBrick(j*32 + 16, i*32 +16);
-                    scene->addItem(smallBrick);
+					this->scene.addItem(smallBrick);
                 }
             }
         }
