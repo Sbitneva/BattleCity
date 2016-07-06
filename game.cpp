@@ -51,6 +51,7 @@ Game::Game(QWidget * parent){
 
     Base * base = new Base();
     scene->addItem(base);
+	base->setPos(384, 768);
 
     QTimer * timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
