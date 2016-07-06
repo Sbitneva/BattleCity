@@ -10,8 +10,6 @@ Player::Player()
 	this->setPixmap(this->pixmap);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setTransformationMode(Qt::SmoothTransformation);
-    this->setPos(256, 768);
-    this->setFocus();
 }
 
 void Player::keyPressEvent(QKeyEvent * event)
@@ -95,8 +93,8 @@ void Player::moveLeft()
     }
 }
 
-void Player::moveRight(){
-
+void Player::moveRight()
+{
     this->pixmap.load(":/player/images/mytank_right.png");
     this->setPixmap(this->pixmap);
     rotation = "Right";
@@ -118,8 +116,8 @@ void Player::moveRight(){
     }
 }
 
-void Player::moveUp(){
-
+void Player::moveUp()
+{
     this->pixmap.load(":/player/images/mytank.png");
     this->setPixmap(this->pixmap);
     rotation = "Up";
