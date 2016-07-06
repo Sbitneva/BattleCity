@@ -1,13 +1,9 @@
 #include "smallbrick.h"
-#include "QDebug"
 #include <QGraphicsScene>
 
-SmallBrick::SmallBrick(int x, int y){
-    //qDebug()<<"small brick";
-    QPixmap * pixmap = new QPixmap(":/images/board/images/board/brick.png");
-    this->setPixmap(*pixmap);
-    this->setFlag(QGraphicsItem::ItemIsFocusable);
+SmallBrick::SmallBrick(int x, int y)
+{
+    this->pixmap.load(":/images/board/images/board/brick.png");
+    this->setPixmap(this->pixmap);
     this->setPos(x, y);
-    this->setFocus();
-
 }

@@ -3,10 +3,13 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include <QGraphicsScene>
+#include <QPixmap>
 
-class SmallBrick:public QObject, public QGraphicsPixmapItem{
-    public:
+class SmallBrick: public QObject, public QGraphicsPixmapItem
+{
+private:
+	QPixmap pixmap;
+public:
     SmallBrick(int x, int y);
 };
 
