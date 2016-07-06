@@ -7,6 +7,9 @@ GeneratedFiles
 x64
 x86
 *.vcxproj*
+*.psess
+*.vsp
+*.sln
 
 # Build related
 debug
