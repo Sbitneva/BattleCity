@@ -14,11 +14,9 @@
 #include "gameover.h"
 
 
-Bullet::Bullet(Rotation rotation, QString tank)
-	: rotation(rotation)
+Bullet::Bullet(Rotation rotation, Group group)
+	: rotation(rotation), group(group)
 {
-    this->parent = tank;
-
     if(this->rotation == Up)
 	{
         pixmap.load(":/player/images/bullet.png");
@@ -70,7 +68,7 @@ void Bullet::move()
             delete this;
             return;
         }
-		else if((parent == "Player") && (typeid(*(colliding_items[i])) == typeid(Enemy)))
+		else if((group == Users) && (typeid(*(colliding_items[i])) == typeid(Enemy)))
 		{
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
@@ -78,7 +76,7 @@ void Bullet::move()
             delete this;
             return;
         }
-		else if((parent == "Enemy") && (typeid(*(colliding_items[i])) == typeid(Player)))
+		else if((group == Bots) && (typeid(*(colliding_items[i])) == typeid(Player)))
 		{
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);

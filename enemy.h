@@ -1,28 +1,13 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <QObject>
-#include <QString>
-#include <QTime>
-#include <QMediaPlayer>
-#include <QGraphicsPixmapItem>
 #include "object.h"
+#include "tank.h"
 
-class Enemy: public QObject, public QGraphicsPixmapItem 
+class Enemy: public Tank 
 {
-    Q_OBJECT
 public:
-    Enemy(Rotation rotation);
-private:
-    Rotation rotation;
-    QPixmap pixmap;
-	QTime timeLastBullet;
-    void shot();
-    void moveLeft();
-    void moveRight();
-    void moveDown();
-    void moveUp();
-    QMediaPlayer sound;
+	Enemy(Rotation rotation);
 };
 
 #endif // ENEMY_H

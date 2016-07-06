@@ -41,7 +41,7 @@ void Player::keyPressEvent(QKeyEvent * event)
 
 void Player::shot()
 {
-    Bullet * bullet = new Bullet(rotation, "Player");
+    Bullet * bullet = new Bullet(rotation, Users);
 
     sound.setMedia(QUrl("qrc:/gamesounds/Audio/explode.wav"));
     sound.play();

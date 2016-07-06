@@ -8,12 +8,13 @@
 #include <QTimer>
 #include <QPixmap>
 #include "object.h"
+#include "tank.h"
 
 class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet(Rotation rotation, QString tank);
+    Bullet(Rotation rotation, Group group);
 public slots:
     void move();
 private:
@@ -21,7 +22,7 @@ private:
     QPixmap pixmap;
     QList<QGraphicsItem *> colliding_items;
 	Rotation rotation;
-    QString parent;
+    Group group;
     void removeBricks(int i);
     void removeBricksUp(int coordX, int coordY);
     void removeBricksLeft(int coordX, int coordY);
