@@ -7,19 +7,20 @@
 #include <QMediaPlayer>
 #include <QTimer>
 #include <QPixmap>
+#include "object.h"
 
 class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet(QString rotation, QString tank);
+    Bullet(Rotation rotation, QString tank);
 public slots:
     void move();
 private:
     QTimer timer;
     QPixmap pixmap;
     QList<QGraphicsItem *> colliding_items;
-    QString rotation;
+	Rotation rotation;
     QString parent;
     void removeBricks(int i);
     void removeBricksUp(int coordX, int coordY);

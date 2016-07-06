@@ -6,14 +6,15 @@
 #include <QTime>
 #include <QMediaPlayer>
 #include <QGraphicsPixmapItem>
+#include "object.h"
 
 class Player: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Player();
+    Player(Rotation rotation);
 private:
-    QString rotation = "Up";
+	Rotation rotation;
 	QPixmap pixmap;
     QTime timeLastBullet;
     void keyPressEvent(QKeyEvent * event);

@@ -25,20 +25,20 @@ Game::Game(QFile& map)
 
     createObstacles();
 
-    Player * player = new Player();
+    Player * player = new Player(Up);
     this->scene.addItem(player);
 	player->setPos(256, 768);
 	player->setFocus();
 
-    Enemy * enemy = new Enemy();
+    Enemy * enemy = new Enemy(Down);
     this->scene.addItem(enemy);
     enemy->setPos(0, 0);
 
-    Enemy * enemy2 = new Enemy();
+    Enemy * enemy2 = new Enemy(Down);
     this->scene.addItem(enemy2);
     enemy2->setPos(384, 0);
 
-    Enemy * enemy3 = new Enemy();
+    Enemy * enemy3 = new Enemy(Down);
     this->scene.addItem(enemy3);
     enemy3->setPos(768, 0);
 

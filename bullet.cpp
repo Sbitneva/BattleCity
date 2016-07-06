@@ -14,24 +14,24 @@
 #include "gameover.h"
 
 
-Bullet::Bullet(QString rotation, QString tank)
+Bullet::Bullet(Rotation rotation, QString tank)
+	: rotation(rotation)
 {
-    this->rotation = rotation;
     this->parent = tank;
 
-    if(this->rotation == "Up")
+    if(this->rotation == Up)
 	{
         pixmap.load(":/player/images/bullet.png");
     }
-    else if(this->rotation == "Down")
+    else if(this->rotation == Down)
 	{
         pixmap.load(":/player/images/bullet_down.png");
     }
-    else if(this->rotation == "Right")
+    else if(this->rotation == Right)
 	{
         pixmap.load(":/player/images/bullet_right.png");
     }
-    else if(this->rotation == "Left")
+    else if(this->rotation == Left)
 	{
         pixmap.load(":/player/images/bullet_left.png");
     }
@@ -99,7 +99,7 @@ void Bullet::move()
     }
 
     //move bullet
-    if(this->rotation == "Up")
+    if(this->rotation == Up)
 	{
         setPos(x(), y() - 10);
         if(pos().y() < 0){
@@ -107,7 +107,7 @@ void Bullet::move()
             delete this;
         }
     }
-    else if(this->rotation == "Down")
+    else if(this->rotation == Down)
 	{
         setPos(x(), y() + 10);
         if(pos().y() > 832){
@@ -115,7 +115,7 @@ void Bullet::move()
             delete this;
         }
     }
-    else if(this->rotation == "Right")
+    else if(this->rotation == Right)
 	{
         setPos(x() + 10, y());
         if(pos().x() > 832){
@@ -123,7 +123,7 @@ void Bullet::move()
             delete this;
         }
     }
-    else if(this->rotation == "Left")
+    else if(this->rotation == Left)
 	{
         setPos(x() - 10, y());
         if(pos().x() < 0){
@@ -140,19 +140,19 @@ void Bullet::removeBricks(int i)
 
     scene()->removeItem(this->colliding_items[i]);
 
-    if(this->rotation == "Up")
+    if(this->rotation == Up)
 	{
         removeBricksUp(coordX, coordY);
     }
-	else if(this->rotation == "Down")
+	else if(this->rotation == Down)
 	{
         removeBricksUp(coordX, coordY);
     }
-	else if(this->rotation == "Left")
+	else if(this->rotation == Left)
 	{
         removeBricksLeft(coordX, coordY);
     }
-	else if(this->rotation == "Right")
+	else if(this->rotation == Right)
 	{
         removeBricksLeft(coordX, coordY);
     }

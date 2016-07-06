@@ -6,14 +6,15 @@
 #include <QTime>
 #include <QMediaPlayer>
 #include <QGraphicsPixmapItem>
+#include "object.h"
 
 class Enemy: public QObject, public QGraphicsPixmapItem 
 {
     Q_OBJECT
 public:
-    Enemy();
+    Enemy(Rotation rotation);
 private:
-    QString rotation = "Up";
+    Rotation rotation;
     QPixmap pixmap;
 	QTime timeLastBullet;
     void shot();

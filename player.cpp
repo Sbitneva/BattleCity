@@ -4,7 +4,8 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 
-Player::Player()
+Player::Player(Rotation rotation)
+	: rotation(rotation)
 {
     this->pixmap.load(":/player/images/mytank.png");
 	this->setPixmap(this->pixmap);
@@ -46,19 +47,19 @@ void Player::shot()
     sound.play();
     this->timeLastBullet.start();
 
-    if(rotation == "Up")
+    if(rotation == Up)
 	{
         bullet->setPos(x() + 26, y());
     }
-    else if(rotation == "Down")
+    else if(rotation == Down)
 	{
         bullet->setPos(x() + 26, y()+64);
     }
-    else if(rotation == "Right")
+    else if(rotation == Right)
 	{
         bullet->setPos(x() + 64, y() + 26);
     }
-    else if(rotation == "Left")
+    else if(rotation == Left)
 	{
         bullet->setPos(x(), y() + 26);
     }
@@ -70,7 +71,7 @@ void Player::moveLeft()
 {
     this->pixmap.load(":/player/images/mytank_left.png");
     this->setPixmap(this->pixmap);
-    rotation = "Left";
+    rotation = Left;
 
     int xTankPos = this->pos().x() - 16;
     int yTankPos = this->pos().y();
@@ -94,7 +95,7 @@ void Player::moveRight()
 {
     this->pixmap.load(":/player/images/mytank_right.png");
     this->setPixmap(this->pixmap);
-    rotation = "Right";
+    rotation = Right;
 
     int xTankPos = this->pos().x() + 64;
     int yTankPos = this->pos().y();
@@ -117,7 +118,7 @@ void Player::moveUp()
 {
     this->pixmap.load(":/player/images/mytank.png");
     this->setPixmap(this->pixmap);
-    rotation = "Up";
+    rotation = Up;
 
     int xTankPos = this->pos().x();
     int yTankPos = this->pos().y() - 16;
@@ -140,7 +141,7 @@ void Player::moveDown()
 {
     this->pixmap.load(":/player/images/mytank_down.png");
     this->setPixmap(this->pixmap);
-    rotation = "Down";
+    rotation = Down;
 
     int xTankPos = this->pos().x();
     int yTankPos = this->pos().y() + 64 ;
