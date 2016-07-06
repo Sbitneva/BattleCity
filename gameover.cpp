@@ -1,12 +1,10 @@
 #include "gameover.h"
-#include <QPixmap>
-#include <QMediaPlayer>
 
-GameOver::GameOver(){
-    pixmap = new QPixmap(":/ui/images/game_over.png");
-    this->setPixmap(*pixmap);
+GameOver::GameOver()
+{
+    this->pixmap.load(":/ui/images/game_over.png");
+    this->setPixmap(this->pixmap);
     this->setPos(292, 292);
-    sound = new QMediaPlayer();
-    sound->setMedia(QUrl("qrc:/ui/Audio/fire.wav"));
-    sound->play();
+    this->sound.setMedia(QUrl("qrc:/ui/Audio/fire.wav"));
+	this->sound.play();
 }

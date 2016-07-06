@@ -5,12 +5,13 @@
 #include <QPixmap>
 #include <QMediaPlayer>
 
-class GameOver:public QGraphicsPixmapItem{
+class GameOver: public QGraphicsPixmapItem
+{
+private:
+	QPixmap pixmap;
+	QMediaPlayer sound;
 public:
     GameOver();
-private:
-    QPixmap * pixmap;
-    QMediaPlayer * sound;
 };
 
 #endif // GAMEOVER_H
