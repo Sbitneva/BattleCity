@@ -9,9 +9,9 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <QMediaPlayer>
-#include <tank.h>
 
-class Enemy: public Tank{
+class Enemy: public QObject, public QGraphicsPixmapItem 
+{
     Q_OBJECT
 public:
     Enemy();
