@@ -1,14 +1,15 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QString>
 #include <QMediaPlayer>
 #include <QTimer>
 #include <QPixmap>
 
-class Bullet:public QObject, public QGraphicsPixmapItem{
+class Bullet: public QObject, public QGraphicsPixmapItem
+{
     Q_OBJECT
 public:
     Bullet(QString rotation, QString tank);
@@ -18,7 +19,7 @@ private:
     QTimer timer;
     QPixmap pixmap;
     QList<QGraphicsItem *> colliding_items;
-    QString rotation = "Up";
+    QString rotation;
     QString parent;
     void removeBricks(int i);
     void removeBricksUp(int coordX, int coordY);
