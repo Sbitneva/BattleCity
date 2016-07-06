@@ -37,9 +37,6 @@ void Enemy::shot()
 		bullet->setPos(x(), y() + 26);
 	}
 
-	bullet->setFlags(QGraphicsItem::ItemIsFocusable);
-	bullet->setFocus();
-
 	scene()->addItem(bullet);
 }
 
