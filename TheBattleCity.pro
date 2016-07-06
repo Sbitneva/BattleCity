@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     bullet.cpp \
     enemy.cpp \
     smallbrick.cpp \
-    armored.cpp
+    armored.cpp \
+    tank.cpp
 
 HEADERS  += \
     Game.h \
@@ -27,7 +28,8 @@ HEADERS  += \
     bullet.h \
     enemy.h \
     smallbrick.h \
-    armored.h
+    armored.h \
+    tank.h
 
 RESOURCES += \
     board_items.qrc \

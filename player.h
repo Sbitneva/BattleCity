@@ -12,8 +12,9 @@
 #include <QList>
 #include <QGraphicsItem>
 #include <QMediaPlayer>
+#include <tank.h>
 
-class Player: public QObject, public QGraphicsPixmapItem{
+class Player: public Tank{
     Q_OBJECT
 public:
     Player();

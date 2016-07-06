@@ -12,7 +12,7 @@
 #include <enemy.h>
 
 
-Game::Game(QWidget * parent = nullptr){
+Game::Game(QWidget * parent){
 
     scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, 832, 832);
