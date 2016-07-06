@@ -46,10 +46,6 @@ Game::Game(QFile& map)
     this->scene.addItem(base);
 	base->setPos(384, 768);
 
-    QTimer * timer = new QTimer();
-    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
-    timer->start(200);
-
     this->show();
 }
 
