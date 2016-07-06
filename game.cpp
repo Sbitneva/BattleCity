@@ -33,6 +33,8 @@ Game::Game(QWidget * parent){
     createObstacles();
     player = new Player();
     scene->addItem(player);
+	player->setPos(256, 768);
+	player->setFocus();
 
     Enemy * enemy = new Enemy();
     scene->addItem(enemy);
