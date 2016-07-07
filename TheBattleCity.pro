@@ -33,7 +33,8 @@ HEADERS  += \
     armored.h \
     tank.h \
     base.h \
-    gameover.h
+    gameover.h \
+    object.h
 
 RESOURCES += \
     board_items.qrc \
