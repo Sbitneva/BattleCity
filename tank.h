@@ -21,7 +21,7 @@ class Tank : public QGraphicsPixmapItem
 {
 public:
 	Tank(Rotation rotation, Sprites& sprites, Group group);
-private:
+protected:
 	Rotation rotation;
 	Group group;
 	Sprites& sprites;
